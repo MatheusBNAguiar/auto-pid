@@ -1,0 +1,2 @@
+# Auto Pid 
+This project will make an algorithm to auto calibrate an specific plant of a system, using Zigler Nichols method and Critic Amplitude, to adjust a PID controller
