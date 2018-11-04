@@ -7,10 +7,3 @@ function outputValue = normalRelay(inputValue, upperLimit, lowerLimit)
         outputValue = 0
     end
 end
-
-
-
-% function outputValue = hysteresisRelay(inputValue, amplitude, hysteresisRelay)
-
-    
-% end
