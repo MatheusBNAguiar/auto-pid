@@ -1,4 +1,7 @@
 function oValue = getValueOnArray(iTable, iIndex)
+    if iIndex <= 0
+        iIndex = 1;
+    end
     try
         if(isa(iTable,'cell'))
             iTable{iIndex}; %#ok<*VUNUS>
