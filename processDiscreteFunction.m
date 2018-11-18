@@ -10,7 +10,7 @@ function outputFunction = processDiscreteFunction( numerator, denominator, input
     if outputLength > 1
         for outputIndex = 2 : outputLength
             outputWeight = denominator(outputIndex);
-            outputIndexValue = getValueOnArray(outputArray, outputArrayLength + 1 - outputIndex);
+            outputIndexValue = getValueOnArray(outputArray, outputArrayLength + 2 - outputIndex);
             discreteOutputValue = discreteOutputValue + outputWeight * outputIndexValue;
         end
     end
