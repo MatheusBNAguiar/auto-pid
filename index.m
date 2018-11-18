@@ -1,9 +1,4 @@
-numerator = input ('Add transfer function numerator, only the indexes \n','s');
-denominator = input ('Add transfer function denominator, only the indexes \n','s');
-sampleTime = input ('Añadir tiempo de muestra \n');
+timeSimulation = 10;
+sampleTime = 0.001;
 
-numerator = str2num(numerator);
-denominator = str2num(denominator);
-
-transfer = tf(numerator, denominator, sampleTime);
-
+[discreteNum, discreteDen] = buildTransferFunction(sampleTime);
