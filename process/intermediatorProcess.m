@@ -8,6 +8,10 @@ function intermediateValue = intermediatorProcess(intermediatorParams, errorArra
     elseif choice == 'relay'
         limitValue = intermediatorParams{2};
         hysteresis = intermediatorParams{3};
-        intermediateValue = hysteresisRelay( errorArray, limitValue,  hysteresis );
+        if hysteresis == 0
+            intermediateValue = normalRelay(errorArray(end), limitValue, limitValue*-1);
+        else
+            intermediateValue = hysteresisRelay( errorArray, limitValue,  hysteresis );
+        end
     end
 end
