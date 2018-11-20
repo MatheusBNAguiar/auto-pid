@@ -2,9 +2,12 @@ clear all;
 close all;
 
 % User passed arguments
+
 reference = 0.1;
 numerator = '50';
+% numerator = input ('Adicione os numeradores da função, apenas números \n','s');
 denominator = '1 11 10';
+% denominator = input ('Adicione os denominadores da função, apenas números \n','s');
 
 relayAmplitude = 0.1;
 stepAmplitude = 0.1;
@@ -14,14 +17,14 @@ desiredAmplitude = 0.85;
 sampleTime = 0.001;
 selectedHysterisis = 0.7;
 timeSimulation = 20;
-simulationTries = 10;
+simulationTries = 8;
 
 [discreteNum, discreteDen] = buildTransferFunction(sampleTime, numerator, denominator);
 
 for simulation = 1:simulationTries
     intermediatorParams = {"relay", relayAmplitude,  selectedHysterisis};
     [timeArray, referenceArray, errorArray, intermediateArray, outputArray] = runProcess(sampleTime, timeSimulation, discreteNum, discreteDen, reference, intermediatorParams);
-    subplot(simulationTries/2,3,simulation);
+    subplot(ceil(simulationTries/2),2,simulation);
     plot(timeArray, outputArray);
     title(['Simulação ', num2str(simulation), '- Saida']);
     if(checkStopStep(outputArray, desiredAmplitude))
@@ -31,15 +34,23 @@ for simulation = 1:simulationTries
     end
 end
 
+figure;
+hold;
+legend('Sinal do Erro','Sinal de Controle');
+plot(timeArray, errorArray);
+plot(timeArray, intermediateArray);
+title('Ação de Controle vs Sinal do Erro');
+
 % Use PID controller
-
-% figure;
 intermediatorParams = createController( errorArray, intermediateArray, outputArray , sampleTime, relayAmplitude);
-% [timeArray, referenceArray, errorArray, intermediateArray, outputArray] = runProcess(sampleTime, timeSimulation, discreteNum, discreteDen, reference, intermediatorParams);
-% title(['Controle']);
-% plot(timeArray, outputArray);
+[timeArray, referenceArray, errorArray, intermediateArray, outputArray] = runProcess(sampleTime, timeSimulation, discreteNum, discreteDen, reference, intermediatorParams);
 
-% numerator = input ('Add transfer function numerator, only the indexes \n','s');
-% denominator = input ('Add transfer function denominator, only the indexes \n','s');
+figure;
+plot(timeArray, outputArray);
+title('Planta com Controle Aplicado');
 
-% intermediatorParams = {"controller", controllerNum, controllerDen};
+figure;
+hold;
+plot(timeArray, errorArray);
+title('Sinal do Erro');
+
