@@ -17,7 +17,7 @@ function outputFunction = processDiscreteFunction( numerator, denominator, input
 
     inputLength = length(numerator);
     inputArrayLength = length(inputArray);
-    for inputIndex = 2 : inputLength
+    for inputIndex = 1 : inputLength
         inputWeight = numerator(inputIndex);
         inputIndexValue = getValueOnArray(inputArray, inputArrayLength + 1 - inputIndex);
         discreteInputValue = discreteInputValue + inputWeight * inputIndexValue ;

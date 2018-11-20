@@ -1,6 +1,7 @@
 function outputCross = calculateRelayCross( errorArray, signalArray )
-    firstValue = signalArray(10);
-    for index = 10:length(signalArray)
+    bound = ceil(length(signalArray)/2);
+    firstValue = signalArray(bound);
+    for index = bound:length(signalArray)
         if signalArray(index) ~= firstValue 
             outputCross = abs(errorArray(index));
             break;
